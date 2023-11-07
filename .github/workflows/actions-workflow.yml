@@ -25,7 +25,7 @@ jobs:
       - name: Checkout so that we have the python script in the container
         uses: actions/checkout@v2
         with:
-            repository: vrra/Local-Language-for-Workflows
+            repository: pavankumar0077/Local-Language-for-Workflows
             token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: View the github context
