@@ -1,4 +1,5 @@
 name: Local Languages Survey 2023 GitHub Actions workflow
+
 on:
   issues:
     types: [opened, edited]
@@ -6,6 +7,7 @@ on:
 jobs:
   issue_opened_edited:
     runs-on: ubuntu-latest
+
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -41,3 +43,6 @@ jobs:
           NEO4J_PASSWD: ${{ secrets.NEO4J_PASSWD }}
           SCRIPTS_DIR: ${{ env.SCRIPTS_DIR }}
           MY_ISSUE_LABEL: ${{ secrets.MY_ISSUE_LABEL }}
+
+      - name: List contents of the directory
+        run: ls -l ${{ env.SCRIPTS_DIR }}
