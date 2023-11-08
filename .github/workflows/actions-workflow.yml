@@ -26,7 +26,7 @@ jobs:
           token: ${{ secrets.GIT_TOKEN }}
 
       - name: View the github context
-        run: echo "$GITHUB_CONTEXT" >> ${{ vars.SCRIPTS_DIR }}/issue.out
+        run: echo "$GITHUB_CONTEXT" >> issue.out
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
