@@ -610,8 +610,8 @@ class App:
 
 
 
-print("neo4j_uri = "+neo4j_uri)
-print("neo4j_user = "+neo4j_user)
+# print("neo4j_uri = "+neo4j_uri)
+# print("neo4j_user = "+neo4j_user)
 
 app = App(neo4j_uri, neo4j_user, neo4j_pass)
 
