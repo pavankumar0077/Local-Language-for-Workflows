@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
         with:
             repository: pavankumar0077/Local-Language-for-Workflows
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.GIT_TOKEN }}
 
       - name: View the github context
         run: echo "$GITHUB_CONTEXT" >> ${{ vars.SCRIPTS_DIR }}/issue.out
@@ -39,8 +39,8 @@ jobs:
           pip install neo4j
           python ${{ vars.SCRIPTS_DIR }}/PushRecordToNeo4j.py
         env:
-            NEO4J_URI: ${{ vars.NEO4J_URL }}
-            NEO4J_USER: ${{ vars.NEO4J_USER }}
-            NEO4J_PASSWD: ${{ vars.NEO4J_PASSWD }}
+            NEO4J_URI: ${{ secrets.NEO4J_URL }}
+            NEO4J_USER: ${{ secrets.NEO4J_USER }}
+            NEO4J_PASSWD: ${{ secrets.NEO4J_PASSWD }}
             SCRIPTS_DIR: ${{ vars.SCRIPTS_DIR }}
-            MY_ISSUE_LABEL: ${{ vars.MY_ISSUE_LABEL }}
+            MY_ISSUE_LABEL: ${{ secrets.MY_ISSUE_LABEL }}
