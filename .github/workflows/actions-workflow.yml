@@ -1,5 +1,4 @@
 name: Local Languages Survey 2023 GitHub Actions workflow
-run-name: Local Languages 2023 GitHub Actions
 on:
   issues:
     types: [opened, edited]
@@ -25,7 +24,7 @@ jobs:
           repository: pavankumar0077/Local-Language-for-Workflows
           token: ${{ secrets.GIT_TOKEN }}
 
-      - name: View the github context
+      - name: View the GitHub context
         run: echo "$GITHUB_CONTEXT" >> issue.out
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -34,11 +33,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install neo4j
-          cd ${{ vars.SCRIPTS_DIR }}
+          cd ${{ env.SCRIPTS_DIR }}
           python PushRecordToNeo4j.py
         env:
           NEO4J_URI: ${{ secrets.NEO4J_URL }}
           NEO4J_USER: ${{ secrets.NEO4J_USER }}
           NEO4J_PASSWD: ${{ secrets.NEO4J_PASSWD }}
-          SCRIPTS_DIR: ${{ vars.SCRIPTS_DIR }}
+          SCRIPTS_DIR: ${{ env.SCRIPTS_DIR }}
           MY_ISSUE_LABEL: ${{ secrets.MY_ISSUE_LABEL }}
