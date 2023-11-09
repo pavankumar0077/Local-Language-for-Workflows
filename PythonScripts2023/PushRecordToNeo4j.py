@@ -39,7 +39,7 @@ my_issue_json= os.environ.get("SCRIPTS_DIR")
 
 class App:
 
-    def __init__(self, uri, user, password):
+    def __init__(self, neo4j_uri, neo4j_user, neo4j_pass):
         self.driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_pass))
 
     def close(self):
