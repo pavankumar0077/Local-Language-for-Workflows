@@ -13,14 +13,13 @@ body:
     id: frequency
     attributes:
       label: How often do you visit the bank in a month?
-      multiple: false
       options:
         - Once
         - Twice
         - Thrice
     validations:
       required: true
-  - type: multiple-choice
+  - type: checkboxes
     id: services
     attributes:
       label: Which of the following banking services do you use regularly? (Select all that apply)
@@ -31,7 +30,7 @@ body:
         - Mobile banking
     validations:
       required: true
-  - type: text
+  - type: textarea
     id: satisfaction
     attributes:
       label: How satisfied are you with the services provided by the bank?
@@ -46,7 +45,7 @@ body:
         - No
     validations:
       required: true
-  - type: text
+  - type: textarea
     id: improvement
     attributes:
       label: What improvements or additional services would you like to see from the bank?
