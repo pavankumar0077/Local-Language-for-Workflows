@@ -19,21 +19,6 @@ body:
         - Thrice
     validations:
       required: true
-  - type: checkboxes
-    id: services
-    attributes:
-      label: Which of the following banking services do you use regularly? (Select all that apply)
-      options:
-        - label: ATM services
-          value: atm
-        - label: Online banking
-          value: online
-        - label: Branch visits
-          value: branch
-        - label: Mobile banking
-          value: mobile
-    validations:
-      required: true
   - type: textarea
     id: satisfaction
     attributes:
