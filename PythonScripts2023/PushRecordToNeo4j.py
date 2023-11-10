@@ -627,7 +627,17 @@ issue_body=json_object["event"]["issue"]["body"]
 issue_body_list=issue_body.split("###")
 print("issue_body_list= ", issue_body_list)
 
-issue_label=json_object["event"]["issue"]["labels"]["name"]
+# issue_label=json_object["event"]["issue"]["labels"]["name"]
+if "labels" in json_object["event"]["issue"]:
+    labels = json_object["event"]["issue"]["labels"]
+    if labels and len(labels) > 0:
+        issue_label = labels[0].get("name")
+        print("issue_label= ", issue_label)
+    else:
+        print("No labels found in the issue.")
+else:
+    print("The 'labels' key is not present in the JSON data.")
+
 print("issue_label= ", issue_label)
 print("my issue_label= ", my_issue_label)
 
