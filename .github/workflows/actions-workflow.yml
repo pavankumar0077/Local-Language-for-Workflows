@@ -14,7 +14,7 @@ on:
 
 jobs:
   issue_opened_edited:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Print issue details
         run: |
