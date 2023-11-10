@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
         with:
             repository: pavankumar0077/Local-Language-for-Workflows
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.GIT_TOKEN }}
 
       - name: View the github context
         run: echo "$GITHUB_CONTEXT" >> ${{ vars.SCRIPTS_DIR }}/issue.out
