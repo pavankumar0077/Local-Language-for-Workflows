@@ -3,7 +3,7 @@ description: This GitHub issue form is for the Banking Survey 2023
 title: "[Banking Survey 2023]: "
 labels: ["Banking Survey 2023"]
 assignees:
-  - yourGitHubUsername
+  - pavankumar0077
 body:
   - type: markdown
     attributes:
