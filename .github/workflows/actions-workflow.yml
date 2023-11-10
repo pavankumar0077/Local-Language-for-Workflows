@@ -37,10 +37,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install neo4j
-
-      - name: Push to Neo4j (Local)
-        if: contains(NEO4J_URI, 'localhost.')
-        run: python ${{ vars.SCRIPTS_DIR }}/PushRecordToNeo4j.py
+          python ${{ vars.SCRIPTS_DIR }}/PushRecordToNeo4j.py
         env:
           NEO4J_URI: ${{ vars.NEO4J_URL }}  # Add the secret for your local server URI
           NEO4J_USER: ${{ vars.NEO4J_USER }}  # Add the secret for your local server username
