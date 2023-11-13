@@ -651,8 +651,14 @@ if (my_issue_label == issue_label):
 # else:
 #     print("This is not a survey submission! lets forget it!")
 
-for field_data in issue_body_list:
-        field_name, field_response = map(str.strip, field_data.split('\n', 1))
+# Process each field separately
+    for field_data in issue_body_list:
+        field_data = field_data.strip()  # Remove leading/trailing whitespaces
+
+        if '\n' in field_data:
+            field_name, field_response = map(str.strip, field_data.split('\n', 1))
+        else:
+            field_name, field_response = field_data, ""
 
         print(f"{field_name} = {field_response}")
 
