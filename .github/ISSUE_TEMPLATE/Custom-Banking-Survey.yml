@@ -16,10 +16,10 @@ body:
     attributes:
       label: In which city do you have a bank account?
       options:
-        - Hyderabad
-        - Bangalore
-        - Chennai
-        - Pune
+        - "Hyderabad"
+        - "Bangalore"
+        - "Chennai"
+        - "Pune"
     validations:
       required: true
   - type: dropdown
@@ -27,8 +27,8 @@ body:
     attributes:
       label: Do you use online banking?
       options:
-        - Yes
-        - No
+        - "Yes"
+        - "No"
     validations:
       required: true
   - type: dropdown
@@ -47,7 +47,7 @@ body:
     attributes:
       label: Have you experienced any issues in transactions like UPI?
       options:
-        - Yes
-        - No
+        - "Yes"
+        - "No"
     validations:
       required: true
