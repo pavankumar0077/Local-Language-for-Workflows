@@ -640,6 +640,10 @@ if (my_issue_label == issue_label):
     bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
     bank_visit_count_prompt = bank_visit_count_base_str[0]
     bank_visit_count_response = bank_visit_count_base_str[1]
+    bank_visit_count_response = bank_visit_count_base_str[2]
+    bank_visit_count_response = bank_visit_count_base_str[3]
+    bank_visit_count_response = bank_visit_count_base_str[4]
+    bank_visit_count_response = bank_visit_count_base_str[5]
 
     print("bank_visit_count_prompt= ", bank_visit_count_prompt)
     print("bank_visit_count_response = ", bank_visit_count_response)
