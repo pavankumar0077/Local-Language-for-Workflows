@@ -163,7 +163,7 @@ class App:
         query = (
             "MATCH (n1) "
             "WHERE n1.name = $actor_name "
-            "SET n1:" + usecase_id + " "  # Assuming usecase_id is a string
+            "SET n1:" + usecase_id + " "
             "RETURN n1"
         )
         result = tx.run(query, actor_name=actor_name)
@@ -174,6 +174,7 @@ class App:
             logging.error("{query} raised an error: \n {exception}".format(
                 query=query, exception=exception))
             raise
+
 
 
 
