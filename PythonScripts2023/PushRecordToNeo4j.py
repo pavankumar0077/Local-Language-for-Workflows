@@ -631,27 +631,9 @@ issue_label=json_object["event"]["issue"]["labels"][0]["name"]
 print("issue_label= ", issue_label)
 print("my issue_label= ", my_issue_label)
 
+if my_issue_label == issue_label:
+    print("This is a survey submission! Let's process it!")
 
-if (my_issue_label == issue_label):
-    print("This is a survey submission! lets process it!")
-
-    #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
-
-#     bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
-#     bank_visit_count_prompt = bank_visit_count_base_str[0]
-#     bank_visit_count_response = bank_visit_count_base_str[1]
-    
-
-#     print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-#     print("bank_visit_count_response = ", bank_visit_count_response)
-
-#     app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
-#                                         bank_visit_count_response, "bank_visit_count_response")
-
-# else:
-#     print("This is not a survey submission! lets forget it!")
-
-# Process each field separately
     for field_data in issue_body_list:
         field_data = field_data.strip()  # Remove leading/trailing whitespaces
 
