@@ -163,10 +163,10 @@ class App:
         query = (
             "MATCH (n1) "
             "WHERE n1.name = $actor_name "
-            "SET n1 :$usecase_id "
+            "SET n1:" + usecase_id + " "  # Assuming usecase_id is a string
             "RETURN n1"
         )
-        result = tx.run(query, actor_name=actor_name, usecase_id=usecase_id)
+        result = tx.run(query, actor_name=actor_name)
         try:
             return [{"n1": row["n1"]["name"]}
                     for row in result]
@@ -174,6 +174,7 @@ class App:
             logging.error("{query} raised an error: \n {exception}".format(
                 query=query, exception=exception))
             raise
+
 
 
     #Vishnu: 1 Aug 2022: created this f() to return all use case actors based on labels
