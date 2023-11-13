@@ -3,7 +3,7 @@ description: This GitHub issue form is for the Custom Banking Survey
 title: "[Custom Banking Survey]: "
 labels: ["Custom Banking Survey"]
 assignees:
-  - yourGitHubUsername
+  - pavan0077
 body:
   - type: textarea
     id: location
