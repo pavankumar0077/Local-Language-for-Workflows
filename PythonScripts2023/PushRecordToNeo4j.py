@@ -139,24 +139,42 @@ class App:
 
     #Vishnu: 1 Aug 2022: created this f() to add use case labels to existing nodes
     #                    Note that the existing labels are left there.
+    # @staticmethod
+    # def _add_usecase_and_return_existing_node_label(tx, actor_name, usecase_id):
+    #     query = (
+    #         "MATCH "
+    #         "(n1) "
+    #         "WHERE n1.name = '" + actor_name +"' "
+    #         "set n1 :" + usecase_id +" "
+    #         "return n1"
+    #     )
+    #     result = tx.run(query, actor_name=actor_name)
+    #     try:
+    #         return [{"n1": row["n1"]["name"]}
+    #                 for row in result]
+    #     # Capture any errors along with the query and data for traceability
+    #     except ServiceUnavailable as exception:
+    #         logging.error("{query} raised an error: \n {exception}".format(
+    #             query=query, exception=exception))
+    #         raise
+
     @staticmethod
     def _add_usecase_and_return_existing_node_label(tx, actor_name, usecase_id):
         query = (
-            "MATCH "
-            "(n1) "
-            "WHERE n1.name = '" + actor_name +"' "
-            "set n1 :" + usecase_id +" "
-            "return n1"
+            "MATCH (n1) "
+            "WHERE n1.name = $actor_name "
+            "SET n1 :$usecase_id "
+            "RETURN n1"
         )
-        result = tx.run(query, actor_name=actor_name)
+        result = tx.run(query, actor_name=actor_name, usecase_id=usecase_id)
         try:
             return [{"n1": row["n1"]["name"]}
                     for row in result]
-        # Capture any errors along with the query and data for traceability
         except ServiceUnavailable as exception:
             logging.error("{query} raised an error: \n {exception}".format(
                 query=query, exception=exception))
             raise
+
 
     #Vishnu: 1 Aug 2022: created this f() to return all use case actors based on labels
     #                    as against properties
