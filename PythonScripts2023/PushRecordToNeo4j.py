@@ -637,19 +637,28 @@ if (my_issue_label == issue_label):
 
     #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
 
-    bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
-    bank_visit_count_prompt = bank_visit_count_base_str[0]
-    bank_visit_count_response = bank_visit_count_base_str[1]
-    bank_visit_count_response = bank_visit_count_base_str[2]
-    bank_visit_count_response = bank_visit_count_base_str[3]
-    bank_visit_count_response = bank_visit_count_base_str[4]
-    bank_visit_count_response = bank_visit_count_base_str[5]
+#     bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
+#     bank_visit_count_prompt = bank_visit_count_base_str[0]
+#     bank_visit_count_response = bank_visit_count_base_str[1]
+    
 
-    print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-    print("bank_visit_count_response = ", bank_visit_count_response)
+#     print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+#     print("bank_visit_count_response = ", bank_visit_count_response)
 
-    app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
-                                        bank_visit_count_response, "bank_visit_count_response")
+#     app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
+#                                         bank_visit_count_response, "bank_visit_count_response")
+
+# else:
+#     print("This is not a survey submission! lets forget it!")
+
+for field_data in issue_body_list:
+        field_name, field_response = map(str.strip, field_data.split('\n', 1))
+
+        print(f"{field_name} = {field_response}")
+
+        # Assuming the field_name is the prompt and field_response is the user's response
+        app.create_actors_relationship_with_usecase(field_name, "response",
+                                                    field_response, f"{field_name}_response")
 
 else:
-    print("This is not a survey submission! lets forget it!")
+    print("This is not a survey submission! Let's forget it!")
