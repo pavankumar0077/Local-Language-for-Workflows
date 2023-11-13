@@ -49,30 +49,57 @@ class App:
     #Vishnu: 1 Aug 2022: uses labels instead of properties
     #Vishnu: 1 Aug 2022: Invariant: only 1 actor with 1 name.
     #        (Note that rel still uses properties and not labels)
+    # def create_node_with_usecase_label(self, actor_name, usecase_id):
+    #     with self.driver.session() as session:
+    #         node_already_exists = session.read_transaction(
+    #             self._find_and_return_existing_node_label, actor_name)
+    #         if not node_already_exists:  
+    #             #node itself doesnt exist (not to mention the use case label), Lets add.
+    #             result = session.write_transaction(
+    #                 self._create_and_return_node_label, actor_name, usecase_id)
+    #             for row in result:
+    #                 print("Created node: {n1}".format(n1=row['n1name']))
+    #         else:
+    #             for row in node_already_exists:
+    #                 print("Node already exists: {name} in {usecase}".format(name=row['n1name'], 
+    #                                                              usecase=row['n1usecase']))
+    #                 if not (usecase_id in row['n1usecase']):
+    #                   print("adding label "
+    #                             +usecase_id+ 
+    #                             " in addition to {usecase}".format(usecase=row['n1usecase']))
+    #                   result = session.write_transaction(
+    #                             self._add_usecase_and_return_existing_node_label, actor_name, usecase_id)
+    #                 else:
+    #                   print("ignoring ...")
+    #                 #row has only 1 entry due to invariant. So break here. and exit f()
+    #                 break
+
     def create_node_with_usecase_label(self, actor_name, usecase_id):
-        with self.driver.session() as session:
-            node_already_exists = session.read_transaction(
-                self._find_and_return_existing_node_label, actor_name)
-            if not node_already_exists:  
-                #node itself doesnt exist (not to mention the use case label), Lets add.
-                result = session.write_transaction(
-                    self._create_and_return_node_label, actor_name, usecase_id)
-                for row in result:
-                    print("Created node: {n1}".format(n1=row['n1name']))
-            else:
-                for row in node_already_exists:
-                    print("Node already exists: {name} in {usecase}".format(name=row['n1name'], 
-                                                                 usecase=row['n1usecase']))
-                    if not (usecase_id in row['n1usecase']):
-                      print("adding label "
-                                +usecase_id+ 
-                                " in addition to {usecase}".format(usecase=row['n1usecase']))
-                      result = session.write_transaction(
-                                self._add_usecase_and_return_existing_node_label, actor_name, usecase_id)
-                    else:
-                      print("ignoring ...")
-                    #row has only 1 entry due to invariant. So break here. and exit f()
-                    break
+    with self.driver.session() as session:
+        # Check if the node already exists
+        node_already_exists = session.read_transaction(
+            self._find_and_return_existing_node_label, actor_name)
+
+        if not node_already_exists:
+            # Node itself doesn't exist (not to mention the use case label), let's add it.
+            result = session.write_transaction(
+                self._create_and_return_node_label, actor_name, usecase_id)
+            for row in result:
+                print("Created node: {n1}".format(n1=row['n1name']))
+        else:
+            for row in node_already_exists:
+                print("Node already exists: {name} in {usecase}".format(name=row['n1name'],
+                                                                         usecase=row['n1usecase']))
+                if usecase_id not in row['n1usecase']:
+                    print("Adding label {} in addition to {}".format(usecase_id, row['n1usecase']))
+                    result = session.write_transaction(
+                        self._add_usecase_and_return_existing_node_label, actor_name, usecase_id)
+                else:
+                    print("Ignoring ...")
+
+                # Row has only 1 entry due to invariant. So break here and exit the function.
+                break
+
     
     #Vishnu: 1 Aug 2022: created this f() to query nodes based on a name
     #                    and return with usecase labels
