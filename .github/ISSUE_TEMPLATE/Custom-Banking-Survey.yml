@@ -22,7 +22,7 @@ body:
         - Pune
     validations:
       required: true
-  - type: radio
+  - type: dropdown
     id: online_banking
     attributes:
       label: Do you use online banking?
@@ -42,7 +42,7 @@ body:
         - "4"
     validations:
       required: true
-  - type: radio
+  - type: dropdown
     id: transaction_issue
     attributes:
       label: Have you experienced any issues in transactions like UPI?
