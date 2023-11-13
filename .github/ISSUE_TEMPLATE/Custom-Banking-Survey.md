@@ -1,0 +1,53 @@
+name: Custom Banking Survey
+description: This GitHub issue form is for the Custom Banking Survey
+title: "[Custom Banking Survey]: "
+labels: ["Custom Banking Survey"]
+assignees:
+  - yourGitHubUsername
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Where are you from?
+    validations:
+      required: true
+  - type: dropdown
+    id: bank_account
+    attributes:
+      label: In which city do you have a bank account?
+      options:
+        - Hyderabad
+        - Bangalore
+        - Chennai
+        - Pune
+    validations:
+      required: true
+  - type: radio
+    id: online_banking
+    attributes:
+      label: Do you use online banking?
+      options:
+        - Yes
+        - No
+    validations:
+      required: true
+  - type: dropdown
+    id: visit_frequency
+    attributes:
+      label: How often do you visit the bank in a month?
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+    validations:
+      required: true
+  - type: radio
+    id: transaction_issue
+    attributes:
+      label: Have you experienced any issues in transactions like UPI?
+      options:
+        - Yes
+        - No
+    validations:
+      required: true
