@@ -648,5 +648,11 @@ if my_issue_label == issue_label:
         app.create_actors_relationship_with_usecase(field_name, "response",
                                                     field_response, f"{field_name}_response")
 
+        # Create a node for each field and store the response as a property
+        app.create_node_with_usecase_label(field_name, {field_name: field_response})
+
+        # Create a node for the response and store it as a property
+        app.create_node_with_usecase_label(f"{field_name}_response", {"response": field_response})
+
 else:
     print("This is not a survey submission! Let's forget it!")
