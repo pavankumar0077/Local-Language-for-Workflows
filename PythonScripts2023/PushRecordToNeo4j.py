@@ -373,11 +373,11 @@ class App:
     # PAVAN Changes
     def create_actors_relationship_with_usecase(self, actor1_name, rel_name, actor2_name, usecase_id):
     # process actor1
-    self.create_node_with_usecase_label(actor1_name, usecase_id)
-    # process actor2
-    self.create_node_with_usecase_label(actor2_name, usecase_id)
-    # process relation
-    self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
+        self.create_node_with_usecase_label(actor1_name, usecase_id)
+        # process actor2
+        self.create_node_with_usecase_label(actor2_name, usecase_id)
+        # process relation
+        self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
 
 
 
@@ -703,16 +703,21 @@ if my_issue_label == issue_label:
     # Iterate through the issue_body_list and save nodes and responses
     for item in issue_body_list[1:]:  # Start from index 1 to skip the empty string at the beginning
         # Extract relevant information from the item (modify as needed)
-        bank_visit_count_base_str = item.split("\n\n", 1)
-        bank_visit_count_prompt = bank_visit_count_base_str[0]
-        bank_visit_count_response = bank_visit_count_base_str[1]
+        response_parts = item.split("\n\n", 1)
 
-        print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-        print("bank_visit_count_response = ", bank_visit_count_response)
+        if len(response_parts) == 2:
+            # Extracting prompt and response
+            bank_visit_count_prompt, bank_visit_count_response = response_parts
 
-        # Use the app to create nodes and relationships
-        app.create_actors_relationship_with_usecase(
-            bank_visit_count_prompt, "response", bank_visit_count_response, "bank_visit_count_response"
-        )
+            print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+            print("bank_visit_count_response = ", bank_visit_count_response)
+
+            # Use the app to create nodes and relationships
+            app.create_actors_relationship_with_usecase(
+                bank_visit_count_prompt, "response", bank_visit_count_response, "bank_visit_count_response"
+            )
+        else:
+            print("Invalid response format. Skipping this entry.")
 else:
     print("This is not a survey submission! Let's forget it!")
+
