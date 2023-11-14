@@ -1,6 +1,7 @@
 name: Survey for Local Language Repository
 description: Survey
 title: "[Survey Form]: "
+labels: ["Survey"]
 assignees:
   - pavan0077
 body:
