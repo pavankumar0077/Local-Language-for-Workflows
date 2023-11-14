@@ -46,8 +46,8 @@ class App:
         # Don't forget to close the driver connection when you are finished with it
         self.driver.close()
 
-    # Vishnu: 1 Aug 2022: uses labels instead of properties
-    # Vishnu: 1 Aug 2022: Invariant: only 1 actor with 1 name.
+    #Vishnu: 1 Aug 2022: uses labels instead of properties
+    #Vishnu: 1 Aug 2022: Invariant: only 1 actor with 1 name.
     #        (Note that rel still uses properties and not labels)
     def create_node_with_usecase_label(self, actor_name, usecase_id):
         with self.driver.session() as session:
@@ -68,9 +68,7 @@ class App:
                                 +usecase_id+ 
                                 " in addition to {usecase}".format(usecase=row['n1usecase']))
                       result = session.write_transaction(
-                                self._add_usecase_and_return_existing_node_lVishnu: 1 Aug 2022: uses labels instead of properties
-    # Vishnu: 1 Aug 2022: Invariant: only 1 actor with 1 name.
-    #        (Note that rel still uses properties and not labels)abel, actor_name, usecase_id)
+                                self._add_usecase_and_return_existing_node_label, actor_name, usecase_id)
                     else:
                       print("ignoring ...")
                     #row has only 1 entry due to invariant. So break here. and exit f()
