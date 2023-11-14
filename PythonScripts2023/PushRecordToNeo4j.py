@@ -373,17 +373,17 @@ class App:
     # PAVAN Changes
     def create_actors_relationship_with_usecase(self, actor_names, rel_name, usecase_id):
     # Iterate through actor_names and process each actor
-    for actor_name in actor_names:
-        # Process the actor
-        self.create_node_with_usecase_label(actor_name, usecase_id)
-    # Process relationships
-    # Assuming actor_names contains at least two elements
-    for i in range(len(actor_names) - 1):
-        actor1_name = actor_names[i]
-        actor2_name = actor_names[i + 1]
-
-        # Process relation
-        self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
+        for actor_name in actor_names:
+            # Process the actor
+            self.create_node_with_usecase_label(actor_name, usecase_id)
+        # Process relationships
+        # Assuming actor_names contains at least two elements
+        for i in range(len(actor_names) - 1):
+            actor1_name = actor_names[i]
+            actor2_name = actor_names[i + 1]
+    
+            # Process relation
+            self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
 
 
     #Vishnu: 23 June 2022: created
