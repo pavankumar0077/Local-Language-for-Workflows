@@ -2,7 +2,7 @@ name: Survey for Local Language Repository
 description: Survey
 title: "[Survey Form]: "
 assignees:
-  - Lingaraj, Shruti, Adarsh
+  - pavan0077
 body:
   - type: markdown
     attributes:
@@ -18,7 +18,7 @@ body:
     attributes:
       label: Name/ Code of surveyor
       description: Enter the name
-      placeholder: ex. Lingaraj/Adarsh/Shruti
+      placeholder: Pavan
     validations:
       required: True
   - type: input
