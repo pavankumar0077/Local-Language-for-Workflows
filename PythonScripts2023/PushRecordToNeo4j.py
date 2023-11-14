@@ -362,13 +362,29 @@ class App:
     #        1 Aug 2022: TBD: create a property-version (as against label) of the same thing.
     #Vishnu: 21 Jun 2022: created this f() to create relationships with usecase label
     #if this works, this is the only function that needed to be called.
-    def create_actors_relationship_with_usecase(self, actor1_name, rel_name, actor2_name, usecase_id):
-            #process actor1
-            self.create_node_with_usecase_label(actor1_name, usecase_id)
-            #process actor2
-            self.create_node_with_usecase_label(actor2_name, usecase_id)
-            #process relation
-            self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
+    # def create_actors_relationship_with_usecase(self, actor1_name, rel_name, actor2_name, usecase_id):
+    #         #process actor1
+    #         self.create_node_with_usecase_label(actor1_name, usecase_id)
+    #         #process actor2
+    #         self.create_node_with_usecase_label(actor2_name, usecase_id)
+    #         #process relation
+    #         self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
+
+    # PAVAN Changes
+    def create_actors_relationship_with_usecase(self, actor_names, rel_name, usecase_id):
+    # Iterate through actor_names and process each actor
+    for actor_name in actor_names:
+        # Process the actor
+        self.create_node_with_usecase_label(actor_name, usecase_id)
+    # Process relationships
+    # Assuming actor_names contains at least two elements
+    for i in range(len(actor_names) - 1):
+        actor1_name = actor_names[i]
+        actor2_name = actor_names[i + 1]
+
+        # Process relation
+        self.create_rel_with_usecase_label(actor1_name, rel_name, actor2_name, usecase_id)
+
 
     #Vishnu: 23 June 2022: created
     #looks for a rel under a use case between 2 given nodes.
@@ -633,41 +649,75 @@ class App:
 
 
 
-# print("neo4j_uri = "+neo4j_uri)
-# print("neo4j_user = "+neo4j_user)
+print("neo4j_uri = "+neo4j_uri)
+print("neo4j_user = "+neo4j_user)
 
+# app = App(neo4j_uri, neo4j_user, neo4j_pass)
+
+# issue_json= my_issue_json + '/issue.out'
+# print("current working dir = "+os.getcwd())
+# print("issue_json = "+issue_json)
+
+# with open(issue_json, 'r') as json_file:
+#     json_object = json.load(json_file)
+
+# issue_body=json_object["event"]["issue"]["body"]
+# issue_body_list=issue_body.split("###")
+# print("issue_body_list= ", issue_body_list)
+
+# issue_label=json_object["event"]["issue"]["labels"][0]["name"]
+# print("issue_label= ", issue_label)
+# print("my issue_label= ", my_issue_label)
+
+# if (my_issue_label == issue_label):
+#     print("This is a survey submission! lets process it!")
+
+#     #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
+#     bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
+#     bank_visit_count_prompt = bank_visit_count_base_str[0]
+#     bank_visit_count_response = bank_visit_count_base_str[1]
+
+#     print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+#     print("bank_visit_count_response = ", bank_visit_count_response)
+#     app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
+#                                         bank_visit_count_response, "bank_visit_count_response")
+# else:
+#     print("This is not a survey submission! lets forget it!")
+
+# PAVAN CHANGES
 app = App(neo4j_uri, neo4j_user, neo4j_pass)
 
-
-issue_json= my_issue_json + '/issue.out'
-print("current working dir = "+os.getcwd())
-print("issue_json = "+issue_json)
+issue_json = my_issue_json + '/issue.out'
+print("current working dir = " + os.getcwd())
+print("issue_json = " + issue_json)
 
 with open(issue_json, 'r') as json_file:
     json_object = json.load(json_file)
 
-issue_body=json_object["event"]["issue"]["body"]
-issue_body_list=issue_body.split("###")
+issue_body = json_object["event"]["issue"]["body"]
+issue_body_list = issue_body.split("###")
 print("issue_body_list= ", issue_body_list)
 
-issue_label=json_object["event"]["issue"]["labels"][0]["name"]
+issue_label = json_object["event"]["issue"]["labels"][0]["name"]
 print("issue_label= ", issue_label)
 print("my issue_label= ", my_issue_label)
 
-if (my_issue_label == issue_label):
-    print("This is a survey submission! lets process it!")
+if my_issue_label == issue_label:
+    print("This is a survey submission! Let's process it!")
 
-    #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
+    # Iterate through the issue_body_list and save nodes and responses
+    for item in issue_body_list[1:]:  # Start from index 1 to skip the empty string at the beginning
+        # Extract relevant information from the item (modify as needed)
+        bank_visit_count_base_str = item.split("\n\n", 1)
+        bank_visit_count_prompt = bank_visit_count_base_str[0]
+        bank_visit_count_response = bank_visit_count_base_str[1]
 
-    bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
-    bank_visit_count_prompt = bank_visit_count_base_str[0]
-    bank_visit_count_response = bank_visit_count_base_str[1]
+        print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+        print("bank_visit_count_response = ", bank_visit_count_response)
 
-    print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-    print("bank_visit_count_response = ", bank_visit_count_response)
-
-    app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
-                                        bank_visit_count_response, "bank_visit_count_response")
-
+        # Use the app to create nodes and relationships
+        app.create_actors_relationship_with_usecase(
+            bank_visit_count_prompt, "response", bank_visit_count_response, "bank_visit_count_response"
+        )
 else:
-    print("This is not a survey submission! lets forget it!")
+    print("This is not a survey submission! Let's forget it!")
