@@ -68,7 +68,9 @@ class App:
                                 +usecase_id+ 
                                 " in addition to {usecase}".format(usecase=row['n1usecase']))
                       result = session.write_transaction(
-                                self._add_usecase_and_return_existing_node_label, actor_name, usecase_id)
+                                self._add_usecase_and_return_existing_node_lVishnu: 1 Aug 2022: uses labels instead of properties
+    # Vishnu: 1 Aug 2022: Invariant: only 1 actor with 1 name.
+    #        (Note that rel still uses properties and not labels)abel, actor_name, usecase_id)
                     else:
                       print("ignoring ...")
                     #row has only 1 entry due to invariant. So break here. and exit f()
@@ -654,28 +656,20 @@ issue_label=json_object["event"]["issue"]["labels"][0]["name"]
 print("issue_label= ", issue_label)
 print("my issue_label= ", my_issue_label)
 
-if my_issue_label == issue_label:
-    print("This is a survey submission! Let's process it!")
+if (my_issue_label == issue_label):
+    print("This is a survey submission! lets process it!")
 
-    for field_data in issue_body_list:
-        field_data = field_data.strip()  # Remove leading/trailing whitespaces
+    #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
 
-        if '\n' in field_data:
-            field_name, field_response = map(str.strip, field_data.split('\n', 1))
-        else:
-            field_name, field_response = field_data, ""
+    bank_visit_count_base_str=issue_body_list[1].split("\n\n", 1)
+    bank_visit_count_prompt = bank_visit_count_base_str[0]
+    bank_visit_count_response = bank_visit_count_base_str[1]
 
-        print(f"{field_name} = {field_response}")
+    print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+    print("bank_visit_count_response = ", bank_visit_count_response)
 
-        # Assuming the field_name is the prompt and field_response is the user's response
-        app.create_actors_relationship_with_usecase(field_name, "response",
-                                                    field_response, f"{field_name}_response")
-
-        # Create a node for each field and store the response as a property
-        app.create_node_with_usecase_label(field_name, {field_name: field_response})
-
-        # Create a node for the response and store it as a property
-        app.create_node_with_usecase_label(f"{field_name}_response", {"response": field_response})
+    app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
+                                        bank_visit_count_response, "bank_visit_count_response")
 
 else:
-    print("This is not a survey submission! Let's forget it!")
+    print("This is not a survey submission! lets forget it!")
