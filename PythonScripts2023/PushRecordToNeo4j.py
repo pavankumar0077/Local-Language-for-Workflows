@@ -707,7 +707,7 @@ if my_issue_label == issue_label:
 
         if len(response_parts) == 2:
             # Extracting prompt and response
-            bank_visit_count_prompt, bank_visit_count_response = response_parts
+            bank_visit_count_prompt, user_response = response_parts
 
             print("bank_visit_count_prompt= ", bank_visit_count_prompt)
             print("user_response = ", user_response)
