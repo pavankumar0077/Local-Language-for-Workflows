@@ -700,12 +700,12 @@ if my_issue_label == issue_label:
         response_parts = item.split("\n\n", 1)
         if len(response_parts) == 2:
             # Extracting prompt and response
-            bank_visit_count_prompt, bank_visit_count_response = response_parts
+            bank_visit_count_prompt, user_responses = response_parts
             print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-            print("bank_visit_count_response = ", bank_visit_count_response)
+            print("user_responses = ", user_responses)
             # Use the app to create nodes and relationships
             app.create_actors_relationship_with_usecase(
-                bank_visit_count_prompt, "response", bank_visit_count_response, "bank_visit_count_response"
+                bank_visit_count_prompt, "response", bank_visit_count_response, "user_responses"
             )
         else:
             print("Invalid response format. Skipping this entry.")
