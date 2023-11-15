@@ -84,7 +84,7 @@ body:
   - type: input
     id: mobile_num
     attributes:
-      label: Mobile Number
+      label: Mobile-Number
       description: Enter Mobile number of participant
   - type: dropdown
     id: languages
