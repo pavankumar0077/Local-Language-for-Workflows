@@ -681,40 +681,31 @@ print("neo4j_user = "+neo4j_user)
 
 # PAVAN CHANGES
 app = App(neo4j_uri, neo4j_user, neo4j_pass)
-
 issue_json = my_issue_json + '/issue.out'
 print("current working dir = " + os.getcwd())
 print("issue_json = " + issue_json)
-
 with open(issue_json, 'r') as json_file:
     json_object = json.load(json_file)
-
 issue_body = json_object["event"]["issue"]["body"]
 issue_body_list = issue_body.split("###")
 print("issue_body_list= ", issue_body_list)
-
 issue_label = json_object["event"]["issue"]["labels"][0]["name"]
 print("issue_label= ", issue_label)
 print("my issue_label= ", my_issue_label)
-
 if my_issue_label == issue_label:
     print("This is a survey submission! Let's process it!")
-
     # Iterate through the issue_body_list and save nodes and responses
     for item in issue_body_list[1:]:  # Start from index 1 to skip the empty string at the beginning
         # Extract relevant information from the item (modify as needed)
         response_parts = item.split("\n\n", 1)
-
         if len(response_parts) == 2:
             # Extracting prompt and response
-            bank_visit_count_prompt, user_response = response_parts
-
+            bank_visit_count_prompt, bank_visit_count_response = response_parts
             print("bank_visit_count_prompt= ", bank_visit_count_prompt)
-            print("user_response = ", user_response)
-
+            print("bank_visit_count_response = ", bank_visit_count_response)
             # Use the app to create nodes and relationships
             app.create_actors_relationship_with_usecase(
-                bank_visit_count_prompt, "response", user_response, "user_response"
+                bank_visit_count_prompt, "response", bank_visit_count_response, "bank_visit_count_response"
             )
         else:
             print("Invalid response format. Skipping this entry.")
