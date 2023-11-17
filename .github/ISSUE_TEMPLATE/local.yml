@@ -5,8 +5,9 @@ labels: ["Survey"]
 assignees:
   - pavan0077
 # Correct usage
-data = {"ConsentBasedSurvey": "Be assured that your information is treated with the utmost security."}
-print(data["ConsentBasedSurvey"])
+data:
+  ConsentBasedSurvey: "Be assured that your information is treated with the utmost security."
+print: "Be assured that your information is treated with the utmost security."
 body:
   - type: markdown
     attributes:
