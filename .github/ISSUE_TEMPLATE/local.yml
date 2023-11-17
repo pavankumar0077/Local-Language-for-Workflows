@@ -4,7 +4,6 @@ title: "[Survey Form]: "
 labels: ["Survey"]
 assignees:
   - pavan0077
-ConsentBasedSurvey: "Be assured that your information is treated with the utmost security."
 body:
   - type: markdown
     attributes:
