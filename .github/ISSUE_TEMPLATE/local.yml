@@ -4,7 +4,7 @@ title: "[Survey Form]: "
 labels: ["Survey"]
 assignees:
   - pavan0077
-Consent-Based-Survey:Be assured that your information is treated with the utmost security and is exclusively utilized for academic, research, and educational purposes. In the context of surveys related to banking, the data collected is strictly for public surveys geared towards enhancing banking services and improving customer experiences. We prioritize your privacy and uphold the highest standards of confidentiality.
+Consent-Based-Survey: Be assured that your information is treated with the utmost security and is exclusively utilized for academic, research, and educational purposes. In the context of surveys related to banking, the data collected is strictly for public surveys geared towards enhancing banking services and improving customer experiences. We prioritize your privacy and uphold the highest standards of confidentiality.
 body:
   - type: markdown
     attributes:
