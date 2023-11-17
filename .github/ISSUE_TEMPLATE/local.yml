@@ -10,6 +10,7 @@ body:
       value: |
         # Survey for Local Language Repository
         # -------------------------------------------------
+        This survey is designed to gather information about your experiences with local languages. Your feedback is valuable, and your responses will help improve our understanding of language diversity.
   - type: markdown
     attributes:
       value: |
